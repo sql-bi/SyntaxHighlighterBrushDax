@@ -1,51 +1,31 @@
-/* 
- * @version
- * 3.0 (April 10, 2014)
- *
+/** 
  * @author
- * Marco Russo (marcosqlbi on github)
+ * SQLBI - info@sqlbi.com
+ * https://www.sqlbi.com
+ * 
+ * @version
+ * 3.5
+ * 
+ * @update
+ * May 9, 2020
 */
 
 SyntaxHighlighter.brushes.DAX = function()
 {
-	var funcs	= 'abs acos acosh acot acoth addcolumns addmissingitems all allexcept allnoblankrow allselected ' +
-	              'and asin asinh atan atanh average averagea averagex beta.dist beta.inv blank calculate calculatetable ' +
-	              'calendar calendarauto ceiling chisq.dist chisq.dist.rt chisq.inv chisq.inv.rt closingbalancemonth ' +
-	              'closingbalancequarter closingbalanceyear combin combina concatenate concatenatex confidence.norm ' +
-	              'confidence.t contains containsrow cos cosh cot coth count counta countax countblank countrows ' +
-	              'countx crossfilter crossjoin currency currentgroup customdata datatable date dateadd datediff ' +
-	              'datesbetween datesinperiod datesmtd datesqtd datesytd datevalue day degrees detailrows distinct ' +
-	              'distinctcount divide earlier earliest edate endofmonth endofquarter endofyear eomonth error ' +
-	              'even exact except exp expon.dist fact false filter filters find firstdate firstnonblank fixed ' +
-	              'floor format gcd generate generateall geomean geomeanx groupby hasonefilter hasonevalue hour ' +
-	              'if iferror ignore int intersect isblank iscrossfiltered isempty iserror iseven isfiltered islogical ' +
-	              'isnontext isnumber iso.ceiling isodd isonorafter issubtotal istext keepfilters keywordmatch lastdate ' +
-	              'lastnonblank lcm left len ln log log10 lookupvalue lower max maxa maxx median medianx mid min mina ' +
-	              'minute minx mod month mround naturalinnerjoin naturalleftouterjoin nextday nextmonth nextquarter ' +
-	              'nextyear not now odd openingbalancemonth openingbalancequarter openingbalanceyear or parallelperiod ' +
-	              'path pathcontains pathitem pathitemreverse pathlength percentile.exc percentile.inc percentilex.exc ' +
-	              'percentilex.inc permut pi poisson.dist power previousday previousmonth previousquarter previousyear ' +
-	              'product productx quotient radians rand randbetween rank.eq rankx related relatedtable replace rept ' +
-	              'right rollup rollupaddissubtotal rollupgroup rollupissubtotal round rounddown roundup row sameperiodlastyear ' +
-	              'sample search second selectcolumns selectedvalue sign sin sinh sqrt sqrtpi startofmonth startofquarter ' +
-	              'startofyear stdev.p stdev.s stdevx.p stdevx.s substitute substitutewithindex sum summarize summarizecolumns ' +
-	              'sumx switch tan tanh time timevalue today topn totalmtd totalqtd totalytd treatas trim true trunc unichar ' +
-	              'unicode union upper userelationship username userobjectid userprincipalname value values var.p var.s varx.p ' +
-	              'varx.s weekday weeknum xirr xnpv year yearfrac';
+	var funcs = 'abs acos acosh acot acoth addcolumns addmissingitems all allcrossfiltered allexcept allnoblankrow allselected and approximatedistinctcount asin asinh atan atanh average averagea averagex beta.dist beta.inv blank calculate calculatetable calendar calendarauto ceiling chisq.dist chisq.dist.rt chisq.inv chisq.inv.rt closingbalancemonth closingbalancequarter closingbalanceyear coalesce combin combina combinevalues concatenate concatenatex confidence.norm confidence.t contains containsrow containsstring containsstringexact convert cos cosh cot coth count counta countax countblank countrows countx crossfilter crossjoin currency currentgroup customdata datatable date dateadd datediff datesbetween datesinperiod datesmtd datesqtd datesytd datevalue day degrees detailrows distinct distinctcount distinctcountnoblank divide earlier earliest edate endofmonth endofquarter endofyear eomonth error even exact except exp expon.dist fact false filter filters find firstdate firstnonblank firstnonblankvalue fixed floor format gcd generate generateall generateseries geomean geomeanx groupby hasonefilter hasonevalue hour if if.eager iferror ignore int intersect isblank iscrossfiltered isempty iserror iseven isfiltered isinscope islogical isnontext isnumber iso.ceiling isodd isonorafter isselectedmeasure issubtotal istext keepfilters keywordmatch lastdate lastnonblank lastnonblankvalue lcm left len ln log log10 lookupvalue lower max maxa maxx median medianx mid min mina minute minx mod month mround naturalinnerjoin naturalleftouterjoin nextday nextmonth nextquarter nextyear nonvisual norm.dist norm.inv norm.s.dist norm.s.inv not now odd openingbalancemonth openingbalancequarter openingbalanceyear or parallelperiod path pathcontains pathitem pathitemreverse pathlength percentile.exc percentile.inc percentilex.exc percentilex.inc permut pi poisson.dist power previousday previousmonth previousquarter previousyear product productx quarter quotient radians rand randbetween rank.eq rankx related relatedtable removefilters replace rept right rollup rollupaddissubtotal rollupgroup rollupissubtotal round rounddown roundup row sameperiodlastyear sample search second selectcolumns selectedmeasure selectedmeasureformatstring selectedmeasurename selectedvalue sign sin sinh sqrt sqrtpi startofmonth startofquarter startofyear stdev.p stdev.s stdevx.p stdevx.s substitute substitutewithindex sum summarize summarizecolumns sumx switch t.dist t.dist.2t t.dist.rt t.inv t.inv.2t tan tanh time timevalue today topn topnskip totalmtd totalqtd totalytd treatas trim true trunc unichar unicode union upper userelationship username userobjectid userprincipalname utcnow utctoday value values var.p var.s varx.p varx.s weekday weeknum xirr xnpv year yearfrac';
 
-	var keywords =	'at asc both by create day define desc evaluate false measure month ' +
-					'none order return single start table true var year';
+	var keywords = 'at asc boolean both by create currency datetime day define desc double evaluate false integer measure month none order return single start string table true var year';
 
-	var operators =	'not';
-
-	this.regexList = [
-		{ regex: /--(.*)$/gm,												css: 'comments' },			// one line and multiline comments
-		{ regex: SyntaxHighlighter.regexLib.multiLineDoubleQuotedString,	css: 'string' },			// double quoted strings
-		{ regex: SyntaxHighlighter.regexLib.multiLineSingleQuotedString,	css: 'string' },			// single quoted strings
-		{ regex: new RegExp(this.getKeywords(funcs), 'gmi'),				css: 'color2' },			// functions
-		{ regex: new RegExp(this.getKeywords(operators), 'gmi'),			css: 'color1' },			// operators and such
-		{ regex: new RegExp(this.getKeywords(keywords), 'gmi'),				css: 'keyword' },			// keyword
-		{ regex: /\(|\)/gm,													css: 'parenthesis' }// parenthesis
+    this.regexList = [
+        { regex: /(^|[^\\])(?:\/\*[\s\S]*?\*\/|(?:--|\/\/).*)/gm,  css: 'comments' },		// Comment: #39A03B
+        { regex: /"(?:[^"]|"")*"(?!")/gm,  css: 'string' },                                 // StringLiteral: #D93124 
+        { regex: /'(?:[^']|'')*'(?!')(?:\[[ \w\xA0-\uFFFF]+\])?|\w+\[[ \w\xA0-\uFFFF]+\]/gm,  css: 'columns' },	// Column reference --> Columns/measures: #333333
+        { regex: /\[[ \w\xA0-\uFFFF]+\]/gm,  css: 'measures' },                             // measure reference --> Columns/measures: #333333
+        { regex: new RegExp(this.getKeywords(funcs), 'gmi'), css: 'functions' },		    // Functions: #035ACA
+        { regex: new RegExp(this.getKeywords(keywords), 'gmi'), css: 'keyword' },		    // Keyword: #035ACA
+        { regex: /:=|[-+*\/=^]|\b(?:IN|NOT)\b/i, css: 'operator' },                         // Operator: #333333
+        { regex: /\b\d+\.?\d*|\B\.\d+\b/i, css: 'number' },                                 // Number: #EE7F18
+        { regex: /[\[\](){}`,.]/gm, css: 'parenthesis' }                                    // Parenthesis: #808080
 		];
 };
 
